@@ -16,12 +16,12 @@
     async function parseCourses() {
         const colors = await fetch(`/api/v1/users/${ENV.current_user_id}/colors/`)
             .then(response => response.text())
-            .then(text => JSON.parse(text.substring(9)).custom_colors)
+            .then(text => JSON.parse(text).custom_colors)
             .catch(console.error);
 
         const json = await fetch("/api/v1/users/self/favorites/courses?include[]=term&exclude[]=enrollments")
             .then(response => response.text())
-            .then(text => JSON.parse(text.substring(9)))
+            .then(text => JSON.parse(text))
             .catch(console.error);
 
         for (const course of json) {
